@@ -9,7 +9,7 @@ import pandas as pd
 
 app = Flask(__name__)
  
-
+app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
 H1_NOT = []
 STATUS_CODE_BAD=[]
 H1_DUPLICATE = []
@@ -125,6 +125,8 @@ def webCrawlerFromForm():
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    from waitress import serve
+    serve(app, host='127.0.0.1', port=5000,debug=False)
+    #app.run(debug=False)
 
 
